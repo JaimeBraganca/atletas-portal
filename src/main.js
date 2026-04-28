@@ -202,12 +202,12 @@ function renderShell() {
     var photoEl = ath.foto
       ? '<img class=\"athlete-photo\" src=\"'+ath.foto+'\" />'
       : '<div class=\"athlete-photo-placeholder\">'+(ath.nome||'?')[0]+'</div>'
-    athHtml = '<div class=\"athlete-card\">'+photoEl+'<div class=\"athlete-info\"><div class=\"athlete-title\">Portal do Atleta</div><div class=\"athlete-name\">'+(ath.nome||'')+'</div></div></div>'
+    athHtml = '<div class=\"athlete-card\">'+photoEl+'<div class=\"athlete-info\"><div class=\"athlete-name\">'+(ath.nome||'')+'</div></div></div>'
   }
   document.getElementById('app').innerHTML =
     '<div class=\"portal\">'
     +'<div class=\"topbar\">'
-    +'<div class=\"top-l\"><img class=\"top-logo\" src=\"'+LOGO+'\" /><span class=\"top-title\">All In Sports</span></div>'
+    +'<div class=\"top-l\"><img class=\"top-logo\" src=\"'+LOGO+'\" /><span class=\"top-title\">Portal do Atleta</span></div>'
     +'<div class=\"top-r\">'
     +'<button class=\"ic-btn\" id=\"lv1\" title=\"Lista\">'+LIST_IC+'</button>'
     +'<button class=\"ic-btn\" id=\"lv2\" title=\"Grelha\">'+GSM_IC+'</button>'
