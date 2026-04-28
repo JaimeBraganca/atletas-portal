@@ -88,17 +88,14 @@ async function listFolder(path) {
 }
 
 async function findAthleteFolder(email) {
-  // Try to find folder matching email or name
   try {
-    const entries = await listFolder(DROPBOX_ROOT)
-    const folders = entries.filter(e => e['.tag'] === 'folder')
-    // Match by email prefix or folder name
-    const emailName = email.split('@')[0].toLowerCase()
-    const match = folders.find(f => 
-      f.name.toLowerCase().includes(emailName) ||
-      emailName.includes(f.name.toLowerCase().replace(/\s/g,''))
-    )
-    return match ? match.path_lower : null
+    const { data, error } = await supabase
+      .from('athlete_folders')
+      .select('folder_path')
+      .eq('email', email)
+      .single()
+    if (error || !data) return null
+    return data.folder_path
   } catch(e) {
     return null
   }
