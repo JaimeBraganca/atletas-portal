@@ -77,7 +77,7 @@ function injectStyles() {
     'body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:#1a1a2e;-webkit-font-smoothing:antialiased}',
     '#app{min-height:100vh}',
     '.portal{display:flex;flex-direction:column;min-height:100vh}',
-    '.topbar{height:52px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;background:#fff;z-index:20}',
+    '.topbar{height:52px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;background:#fff;z-index:20}',
     '.top-l{display:flex;align-items:center;gap:8px}',
     '.top-logo{width:26px;height:26px;border-radius:6px;object-fit:cover}',
     '.top-title{font-size:15px;font-weight:600;color:#0f1923}',
@@ -88,9 +88,9 @@ function injectStyles() {
     '.logout{font-size:12px;color:#aaa;background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:5px}',
     '.logout:hover{background:#f5f5f5;color:#555}',
     // athlete card
-    '.athlete-card{display:flex;align-items:center;gap:12px;padding:10px 20px;border-bottom:1px solid #e4e6eb;background:#fff}',
-    '.athlete-photo{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid #e4e6eb;flex-shrink:0}',
-    '.athlete-photo-placeholder{width:36px;height:36px;border-radius:50%;background:#e8f0ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:#0066ff}',
+    '.athlete-card{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #e4e6eb;background:#fff}',
+    '.athlete-photo{width:54px;height:54px;border-radius:50%;object-fit:cover;border:1px solid #e4e6eb;flex-shrink:0}',
+    '.athlete-photo-placeholder{width:54px;height:54px;border-radius:50%;background:#e8f0ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;font-weight:700;color:#0066ff}',
     '.athlete-info{}',
     '.athlete-title{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}',
     '.athlete-name{font-size:14px;font-weight:500;color:#0f1923}',
@@ -106,7 +106,7 @@ function injectStyles() {
     '.lv-btns{display:flex;gap:3px}',
     // list
     '.file-list{flex:1}',
-    '.frow{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid #f7f7f7;cursor:pointer;transition:background 0.1s;-webkit-tap-highlight-color:transparent}',
+    '.frow{display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid #f7f7f7;cursor:pointer;transition:background 0.1s;-webkit-tap-highlight-color:transparent}',
     '.frow:hover{background:#fafafa}',
     '.frow:active{background:#f0f0f0}',
     '.rthumb{width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0}',
@@ -142,7 +142,7 @@ function injectStyles() {
     '.auth-sub{width:100%;padding:12px;background:linear-gradient(135deg,#0066ff,#0044cc);color:#fff;border:none;border-radius:7px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;transition:opacity 0.15s}',
     '.auth-sub:disabled{opacity:0.5}',
     '.auth-er{background:#fff0f0;border:1px solid #fca5a5;border-radius:6px;padding:8px 11px;font-size:12px;color:#dc2626;margin-bottom:10px}',
-    '.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a2e;color:#fff;font-size:13px;padding:9px 16px;border-radius:8px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap;z-index:100}',
+    '.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a2e;color:#fff;font-size:13px;padding:9px 16px;border-radius:8px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap;z-index:100}.preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;}.preview-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;padding:8px;}.preview-name{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;opacity:0.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80%;}.preview-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px;}.preview-video{max-width:90vw;max-height:85vh;border-radius:4px;outline:none;}.preview-dl{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);background:#0061ff;color:#fff;border:none;border-radius:7px;padding:9px 20px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;}',
     '.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}',
     '.toast.success{background:#16a34a}',
     '.toast.error{background:#dc2626}',
@@ -337,6 +337,59 @@ async function loadThumbs(files) {
         })
       }
     }
+  }
+}
+
+async function openPreview(path, name, type) {
+  var overlay = document.createElement('div')
+  overlay.className = 'preview-overlay'
+  var dlSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+  overlay.innerHTML = '<button class="preview-close" id="prev-close">✕</button>'
+    + '<div id="prev-content" style="display:flex;align-items:center;justify-content:center;"></div>'
+    + '<div class="preview-name">' + name + '</div>'
+    + '<button class="preview-dl" id="prev-dl">' + dlSvg + ' Download</button>'
+  document.body.appendChild(overlay)
+
+  document.getElementById('prev-close').addEventListener('click', function() {
+    document.body.removeChild(overlay)
+  })
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) document.body.removeChild(overlay)
+  })
+
+  document.getElementById('prev-dl').addEventListener('click', async function() {
+    toast('A preparar download...', '')
+    try {
+      var link = await getLink(path)
+      var a = document.createElement('a')
+      a.href = link; a.download = name
+      document.body.appendChild(a); a.click(); document.body.removeChild(a)
+      toast('Download iniciado!', 'success')
+    } catch(e) { toast('Erro no download.', 'error') }
+  })
+
+  var content_el = document.getElementById('prev-content')
+  toast('A carregar...', '')
+
+  try {
+    var link = await getLink(path)
+    if (type === 'img') {
+      var img = document.createElement('img')
+      img.className = 'preview-img'
+      img.src = link
+      content_el.appendChild(img)
+    } else {
+      var vid = document.createElement('video')
+      vid.className = 'preview-video'
+      vid.src = link
+      vid.controls = true
+      vid.autoplay = true
+      content_el.appendChild(vid)
+    }
+    document.getElementById('toast') && document.getElementById('toast').classList.remove('show')
+  } catch(e) {
+    toast('Erro ao carregar preview.', 'error')
+    document.body.removeChild(overlay)
   }
 }
 
