@@ -226,6 +226,9 @@ function renderShell() {
     +'</div></div>'
     +athHtml
     +'<div id=\"bc\" class=\"bc-bar\" style=\"display:none;\"></div>'
+    +'<div class=\"app-body\">'
+    +'<div class=\"sidebar\" id=\"sidebar\"><div class=\"sidebar-title\">Pastas</div><div id=\"sidebar-list\"><div style=\"padding:8px 16px;font-size:12px;color:#ccc;\">A carregar...</div></div></div>'
+    +'<div class=\"main-content\">'
     +'<div class=\"toolbar\">'
     +'<button id=\"sort-btn\" style=\"display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-size:13px;color:#555;padding:4px 8px;border-radius:6px;font-family:inherit;\">'
     +'<span style=\"font-weight:500;\">Nome ↑</span>'
@@ -234,6 +237,8 @@ function renderShell() {
     +'<span class=\"tool-count\" id=\"tc\"></span>'
     +'</div>'
     +'<div id=\"fl\" class=\"file-list\"><div class=\"loading\"><div class=\"spin\"></div> A carregar...</div></div>'
+    +'</div>'
+    +'</div>'
     +'</div>'
     +'<div class=\"toast\" id=\"toast\"></div>'
 
