@@ -153,7 +153,7 @@ function injectStyles() {
     '.auth-err{background:#fff0f0;border:1px solid #fca5a5;border-radius:7px;padding:9px 13px;font-size:13px;color:#dc2626;margin-bottom:12px}',
     '.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a2e;color:#fff;font-size:13px;padding:10px 18px;border-radius:9px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap;z-index:300}'
     + '.app-body{display:flex;flex:1;min-height:0}'
-    + '.sidebar{width:220px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa}'
+    + '.sidebar{width:260px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa}'
     + '.sidebar-title{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;padding:6px 16px 4px}'
     + '.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;font-size:13px;color:#444;border-radius:0;transition:background 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
     + '.sidebar-item:hover{background:#f0f0f0}'
@@ -222,7 +222,6 @@ function renderShell() {
     +'<div class=\"topbar\">'
     +'<div class=\"top-l\"><img class=\"top-logo\" src=\"'+LOGO+'\" /><span class=\"top-title\">Portal do Atleta</span></div>'
     +'<div class=\"top-r\">'
-    +'<button class=\"ic-btn\" id=\"btn-layout\" title=\"Layout\">'+GSM_IC+'</button>'
     +'<button class=\"out-btn\" id=\"btn-out\">'+OUT_IC+'</button>'
     +'</div></div>'
     +athHtml
@@ -244,7 +243,7 @@ function renderShell() {
     +'<div class=\"toast\" id=\"toast\"></div>'
 
   document.getElementById('btn-out').addEventListener('click', async function(){ await supabase.auth.signOut(); renderAuth() })
-  document.getElementById('btn-layout').addEventListener('click', function(e){ toggleLayoutMenu(e) })
+  document.getElementById('btn-layout2').addEventListener('click', function(e){ toggleLayoutMenu(e) })
   document.getElementById('sort-btn').addEventListener('click', function(e){ toggleSortMenu(e) })
   setLayout(state.layout)
 }
@@ -252,7 +251,7 @@ function renderShell() {
 function setLayout(l) {
   state.layout = l
   // Update layout button icon
-  var btn = document.getElementById('btn-layout')
+  var btn = document.getElementById('btn-layout2')
   if (btn) {
     var icons = {'list': LIST_IC, 'gsm': GSM_IC, 'glg': GLG_IC}
     btn.innerHTML = icons[l] || GSM_IC
@@ -265,7 +264,7 @@ function toggleLayoutMenu(e) {
   e.stopPropagation()
   var existing = document.getElementById('layout-menu')
   if (existing) { existing.remove(); return }
-  var btn = document.getElementById('btn-layout')
+  var btn = document.getElementById('btn-layout2')
   var rect = btn.getBoundingClientRect()
   var menu = document.createElement('div')
   menu.id = 'layout-menu'
@@ -386,7 +385,7 @@ function renderFiles() {
     return a.name.localeCompare(b.name) * dir
   })
   var tc = document.getElementById('tc')
-  if (tc) tc.textContent = sorted.length + ' item' + (sorted.length!==1?'s':'')
+  if (tc) tc.textContent = ''
   if (state.layout === 'list') renderList(sorted, fl)
   else renderGrid(sorted, fl)
 }
