@@ -80,8 +80,8 @@ function injectStyles() {
     '.ic-btn{width:34px;height:34px;border:1px solid #e5e5e5;border-radius:7px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;transition:all 0.12s}',
     '.ic-btn:hover{background:#f5f5f5;border-color:#ddd}',
     '.ic-btn.on{background:#eff4ff;border-color:#c7d9ff;color:#0061ff}',
-    '.out-btn{font-size:13px;color:#999;background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:6px;display:flex;align-items:center;gap:5px}',
-    '.out-btn:hover{background:#f5f5f5;color:#555}',
+    '.out-btn{width:34px;height:34px;border:1px solid #e5e5e5;border-radius:7px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;transition:background 0.12s}',
+    '.out-btn:hover{background:#f5f5f5;border-color:#ddd}',
     // athlete card - Dropbox style header
     '.athlete-card{display:flex;align-items:center;gap:16px;padding:20px 24px;border-bottom:1px solid #f0f0f0}',
     '.ath-photo{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid #eee;flex-shrink:0}',
@@ -203,7 +203,7 @@ function renderAuth() {
 var LIST_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"15\" height=\"15\"><line x1=\"8\" y1=\"6\" x2=\"21\" y2=\"6\"/><line x1=\"8\" y1=\"12\" x2=\"21\" y2=\"12\"/><line x1=\"8\" y1=\"18\" x2=\"21\" y2=\"18\"/><circle cx=\"3\" cy=\"6\" r=\"1\" fill=\"currentColor\"/><circle cx=\"3\" cy=\"12\" r=\"1\" fill=\"currentColor\"/><circle cx=\"3\" cy=\"18\" r=\"1\" fill=\"currentColor\"/></svg>'
 var GSM_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"15\" height=\"15\"><rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"13\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"3\" y=\"13\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"1.5\"/></svg>'
 var GLG_IC = GSM_IC
-var OUT_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"14\" height=\"14\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><polyline points=\"16 17 21 12 16 7\"/><line x1=\"21\" y1=\"12\" x2=\"9\" y2=\"12\"/></svg>'
+var OUT_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><polyline points=\"16 17 21 12 16 7\"/><line x1=\"21\" y1=\"12\" x2=\"9\" y2=\"12\"/></svg>'
 var DL_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"13\" height=\"13\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/></svg>'
 var ARR_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"14\" height=\"14\"><polyline points=\"9 18 15 12 9 6\"/></svg>'
 var CLOSE_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"18\" height=\"18\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/></svg>'
@@ -215,7 +215,7 @@ function renderShell() {
     var photoEl = ath.foto
       ? '<img class=\"ath-photo\" src=\"'+ath.foto+'\" />'
       : '<div class=\"ath-photo-ph\">'+(ath.nome||'?')[0]+'</div>'
-    athHtml = '<div class=\"athlete-card\">'+photoEl+'<div class=\"ath-info\"><div class=\"ath-label\">Portal do Atleta</div><div class=\"ath-name\">'+(ath.nome||'')+'</div></div></div>'
+    athHtml = '<div class=\"athlete-card\">'+photoEl+'<div class=\"ath-info\"><div class=\"ath-name\">'+(ath.nome||'')+'</div></div></div>'
   }
   document.getElementById('app').innerHTML =
     '<div style=\"display:flex;flex-direction:column;min-height:100vh;\">'
