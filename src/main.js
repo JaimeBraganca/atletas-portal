@@ -234,7 +234,7 @@ function renderShell() {
     +'<span style=\"font-weight:500;\">Nome ↑</span>'
     +'<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"12\" height=\"12\"><polyline points=\"6 9 12 15 18 9\"/></svg>'
     +'</button>'
-    +'<span class=\"tool-count\" id=\"tc\"></span>'
+    +'<button class=\"ic-btn\" id=\"btn-layout2\" title=\"Layout\">'+GSM_IC+'</button>'
     +'</div>'
     +'<div id=\"fl\" class=\"file-list\"><div class=\"loading\"><div class=\"spin\"></div> A carregar...</div></div>'
     +'</div>'
