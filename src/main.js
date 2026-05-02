@@ -79,7 +79,7 @@ function injectStyles() {
     '.top-r{display:flex;align-items:center;gap:6px}',
     '.ic-btn{width:34px;height:34px;border:1px solid #e5e5e5;border-radius:7px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;transition:all 0.12s}',
     '.ic-btn:hover{background:#f5f5f5;border-color:#ddd}',
-    '.ic-btn.on{background:#eff4ff;border-color:#c7d9ff;color:#0061ff}',
+    '.ic-btn.on{background:#f0f0f0;border-color:#ddd;color:#1a1a2e}',
     '.out-btn{width:34px;height:34px;border:1px solid #e5e5e5;border-radius:7px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;transition:background 0.12s}',
     '.out-btn:hover{background:#f5f5f5;border-color:#ddd}',
     // athlete card - Dropbox style header
@@ -113,13 +113,13 @@ function injectStyles() {
     '.dl-btn{width:28px;height:28px;border-radius:6px;border:1px solid #eee;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#888;opacity:0;transition:opacity 0.15s}',
     '.frow:hover .dl-btn{opacity:1}',
     // grid
-    '.grid-sm{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px}',
+    '.grid-sm{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:20px}',
     '.grid-lg{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:3px}',
     '.gcell{cursor:pointer;border-radius:10px;overflow:hidden;background:#f0f1f3;position:relative;transition:transform 0.12s,box-shadow 0.12s}',
     '.gcell:hover{box-shadow:0 2px 12px rgba(0,0,0,0.1);transform:translateY(-1px)}.gcell:active{transform:scale(0.97)}',
-    '.gcell-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}',
-    '.gcell-icon{width:100%;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:#f0f1f3}',
-    '.gcell-name{font-size:13px;color:#1a1a2e;text-align:left;padding:10px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fff;border-top:1px solid #e8e8e8;font-weight:400}',
+    '.gcell-thumb{width:100%;aspect-ratio:1.2;object-fit:cover;display:block}',
+    '.gcell-icon{width:100%;aspect-ratio:1.2;display:flex;align-items:center;justify-content:center;background:#f0f1f3;padding:30px}',
+    '.gcell-name{font-size:13px;color:#1a1a2e;text-align:left;padding:10px 14px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fff;border-top:1px solid #e8e8e8;font-weight:400}',
     '.gcell-name-lg{font-size:12px;padding:7px 8px}',
     // preview overlay
     '.prev-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center}',
@@ -154,7 +154,7 @@ function injectStyles() {
     '.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a2e;color:#fff;font-size:13px;padding:10px 18px;border-radius:9px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap;z-index:300}'
     + '.app-body{display:flex;flex:1;min-height:0}'
     + '.sidebar{width:260px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa}'
-    + '.sidebar-title{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;padding:6px 16px 4px}'
+    + '.sidebar-title{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;padding:6px 24px 4px}'
     + '.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;font-size:13px;color:#444;border-radius:0;transition:background 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
     + '.sidebar-item:hover{background:#f0f0f0}'
     + '.sidebar-item.active{background:#eff4ff;color:#0061ff;font-weight:500}'
@@ -201,8 +201,8 @@ function renderAuth() {
   document.getElementById('ap').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()})
 }
 
-var LIST_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"15\" height=\"15\"><line x1=\"8\" y1=\"6\" x2=\"21\" y2=\"6\"/><line x1=\"8\" y1=\"12\" x2=\"21\" y2=\"12\"/><line x1=\"8\" y1=\"18\" x2=\"21\" y2=\"18\"/><circle cx=\"3\" cy=\"6\" r=\"1\" fill=\"currentColor\"/><circle cx=\"3\" cy=\"12\" r=\"1\" fill=\"currentColor\"/><circle cx=\"3\" cy=\"18\" r=\"1\" fill=\"currentColor\"/></svg>'
-var GSM_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"15\" height=\"15\"><rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"13\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"3\" y=\"13\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"1.5\"/></svg>'
+var LIST_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.5\" width=\"15\" height=\"15\"><line x1=\"8\" y1=\"6\" x2=\"21\" y2=\"6\"/><line x1=\"8\" y1=\"12\" x2=\"21\" y2=\"12\"/><line x1=\"8\" y1=\"18\" x2=\"21\" y2=\"18\"/><circle cx=\"3\" cy=\"6\" r=\"1\" fill=\"#1a1a2e\"/><circle cx=\"3\" cy=\"12\" r=\"1\" fill=\"#1a1a2e\"/><circle cx=\"3\" cy=\"18\" r=\"1\" fill=\"#1a1a2e\"/></svg>'
+var GSM_IC='<svg viewBox=\"0 0 24 24\" fill=\"#1a1a2e\" width=\"15\" height=\"15\"><rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"13\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"3\" y=\"13\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"13\" y=\"13\" width=\"8\" height=\"8\" rx=\"1.5\"/></svg>'
 var GLG_IC = GSM_IC
 var OUT_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"16\" height=\"16\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><polyline points=\"16 17 21 12 16 7\"/><line x1=\"21\" y1=\"12\" x2=\"9\" y2=\"12\"/></svg>'
 var DL_IC='<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"13\" height=\"13\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/></svg>'
@@ -577,7 +577,7 @@ function createSidebarItem(f, depth) {
 
   var row = document.createElement('div')
   row.className = 'sidebar-item'
-  row.style.paddingLeft = (16 + depth*14) + 'px'
+  row.style.paddingLeft = (24 + depth*14) + 'px'
 
   var arrowEl = document.createElement('span')
   arrowEl.className = 'sb-arrow'
