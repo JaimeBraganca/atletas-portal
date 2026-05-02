@@ -158,6 +158,7 @@ function injectStyles() {
     + '.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;font-size:13px;color:#444;border-radius:0;transition:background 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
     + '.sidebar-item:hover{background:#f0f0f0}'
     + '.sidebar-item.active{background:#eff4ff;color:#0061ff;font-weight:500}'
+    + '.sidebar-item{display:flex;align-items:center;gap:6px;padding:7px 16px;cursor:pointer;font-size:13px;color:#444;transition:background 0.1s;user-select:none;-webkit-tap-highlight-color:transparent}'
     + '.sidebar-folder-ic{flex-shrink:0}'
     + '.main-content{flex:1;min-width:0;overflow-y:auto;display:flex;flex-direction:column}',
     '.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}',
@@ -549,6 +550,9 @@ window.addEventListener('popstate', function(){
   }
 })
 
+var sidebarExpanded = {}
+var sidebarChildren = {}
+
 async function loadSidebar(rootPath) {
   var entries = await listFolder(rootPath)
   var folders = entries.filter(function(e){ return e['.tag']==='folder' })
@@ -556,26 +560,92 @@ async function loadSidebar(rootPath) {
   var sl = document.getElementById('sidebar-list')
   if (!sl) return
   if (!folders.length) { sl.innerHTML = '<div style=\"padding:8px 16px;font-size:12px;color:#ccc;\">Sem pastas</div>'; return }
-  var folderIcon = '<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"14\" height=\"14\" class=\"sidebar-folder-ic\"><path d=\"M3 7a2 2 0 0 1 2-2h3.586a1 1 0 0 1 .707.293L11 7h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" stroke=\"#0061ff\"/></svg>'
-  sl.innerHTML = folders.map(function(f){
-    return '<div class=\"sidebar-item\" data-path=\"'+f.path_lower+'\" data-name=\"'+f.name.replace(/"/g,'&quot;')+'\">'
-      + folderIcon
-      + '<span style=\"overflow:hidden;text-overflow:ellipsis;\">'+f.name+'</span>'
-      + '</div>'
-  }).join('')
-  sl.querySelectorAll('.sidebar-item').forEach(function(el){
-    el.addEventListener('click', function(){
-      sl.querySelectorAll('.sidebar-item').forEach(function(i){ i.classList.remove('active') })
-      el.classList.add('active')
-      var path = el.dataset.path, name = el.dataset.name
-      state.breadcrumbs = [
-        {name: state.breadcrumbs[0].name, path: state.breadcrumbs[0].path},
-        {name: name, path: path}
-      ]
-      history.pushState({lvl:2}, '', location.pathname)
-      loadFiles(path)
-    })
+  renderSidebarItems(sl, folders, 0)
+}
+
+function renderSidebarItems(container, folders, depth) {
+  container.innerHTML = ''
+  folders.forEach(function(f){
+    var item = createSidebarItem(f, depth)
+    container.appendChild(item)
   })
+}
+
+function createSidebarItem(f, depth) {
+  var wrap = document.createElement('div')
+  wrap.dataset.path = f.path_lower
+
+  var row = document.createElement('div')
+  row.className = 'sidebar-item'
+  row.style.paddingLeft = (16 + depth*14) + 'px'
+
+  var arrowEl = document.createElement('span')
+  arrowEl.className = 'sb-arrow'
+  arrowEl.style.cssText = 'width:14px;height:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#bbb;transition:transform 0.15s;'
+  arrowEl.innerHTML = '<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"10\" height=\"10\"><polyline points=\"9 18 15 12 9 6\"/></svg>'
+
+  var icEl = document.createElement('span')
+  icEl.style.cssText = 'flex-shrink:0;display:flex;align-items:center;'
+  icEl.innerHTML = '<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#0061ff\" stroke-width=\"1.5\" width=\"14\" height=\"14\"><path d=\"M3 7a2 2 0 0 1 2-2h3.586a1 1 0 0 1 .707.293L11 7h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/></svg>'
+
+  var nameEl = document.createElement('span')
+  nameEl.textContent = f.name
+  nameEl.style.cssText = 'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;'
+
+  row.appendChild(arrowEl)
+  row.appendChild(icEl)
+  row.appendChild(nameEl)
+  wrap.appendChild(row)
+
+  // Children container
+  var children = document.createElement('div')
+  children.className = 'sb-children'
+  children.style.display = 'none'
+  wrap.appendChild(children)
+
+  // Click on arrow to expand
+  arrowEl.addEventListener('click', async function(e){
+    e.stopPropagation()
+    var expanded = sidebarExpanded[f.path_lower]
+    if (expanded) {
+      sidebarExpanded[f.path_lower] = false
+      children.style.display = 'none'
+      arrowEl.style.transform = ''
+    } else {
+      sidebarExpanded[f.path_lower] = true
+      arrowEl.style.transform = 'rotate(90deg)'
+      children.style.display = 'block'
+      if (!sidebarChildren[f.path_lower]) {
+        children.innerHTML = '<div style=\"padding:6px '+(16+depth*14+28)+'px;font-size:11px;color:#ccc;\">A carregar...</div>'
+        var sub = await listFolder(f.path_lower)
+        var subFolders = sub.filter(function(e){ return e['.tag']==='folder' })
+        sidebarChildren[f.path_lower] = subFolders
+        children.innerHTML = ''
+        if (subFolders.length) {
+          subFolders.forEach(function(sf){
+            children.appendChild(createSidebarItem(sf, depth+1))
+          })
+        } else {
+          arrowEl.style.opacity = '0.2'
+          arrowEl.style.pointerEvents = 'none'
+        }
+      }
+    }
+  })
+
+  // Click on row to navigate
+  row.addEventListener('click', function(){
+    document.querySelectorAll('.sidebar-item').forEach(function(i){ i.classList.remove('active') })
+    row.classList.add('active')
+    var crumbs = [{name: state.breadcrumbs[0].name, path: state.breadcrumbs[0].path}]
+    // Build breadcrumbs from depth
+    crumbs.push({name: f.name, path: f.path_lower})
+    state.breadcrumbs = crumbs
+    history.pushState({lvl:2}, '', location.pathname)
+    loadFiles(f.path_lower)
+  })
+
+  return wrap
 }
 
 async function init() {
