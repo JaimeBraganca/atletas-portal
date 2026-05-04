@@ -77,9 +77,9 @@ function injectStyles() {
     '.top-logo{width:28px;height:28px;border-radius:6px;object-fit:cover;flex-shrink:0}',
     '.top-title{font-size:15px;font-weight:600;color:#0f1923;letter-spacing:-0.1px}',
     '.top-r{display:flex;align-items:center;gap:6px}',
-    '.ic-btn{width:34px;height:34px;border:1px solid #e5e5e5;border-radius:7px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;transition:all 0.12s}',
+    '.ic-btn{width:34px;height:34px;border:1px solid #e5e5e5;border-radius:7px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#1a1a2e;transition:all 0.12s}',
     '.ic-btn:hover{background:#f5f5f5;border-color:#ddd}',
-    '.ic-btn.on{background:#f0f0f0;border-color:#ddd;color:#1a1a2e}',
+    '.ic-btn.on{background:#f0f0f0;border-color:#ccc;color:#1a1a2e}',
     '.out-btn{width:34px;height:34px;border:1px solid #e5e5e5;border-radius:7px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;transition:background 0.12s}',
     '.out-btn:hover{background:#f5f5f5;border-color:#ddd}',
     // athlete card - Dropbox style header
@@ -113,13 +113,13 @@ function injectStyles() {
     '.dl-btn{width:28px;height:28px;border-radius:6px;border:1px solid #eee;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#888;opacity:0;transition:opacity 0.15s}',
     '.frow:hover .dl-btn{opacity:1}',
     // grid
-    '.grid-sm{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:20px}',
+    '.grid-sm{display:grid;grid-template-columns:repeat(2,minmax(200px,1fr));gap:20px;padding:24px}',
     '.grid-lg{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:3px}',
     '.gcell{cursor:pointer;border-radius:10px;overflow:hidden;background:#f0f1f3;position:relative;transition:transform 0.12s,box-shadow 0.12s}',
     '.gcell:hover{box-shadow:0 2px 12px rgba(0,0,0,0.1);transform:translateY(-1px)}.gcell:active{transform:scale(0.97)}',
-    '.gcell-thumb{width:100%;aspect-ratio:1.2;object-fit:cover;display:block}',
-    '.gcell-icon{width:100%;aspect-ratio:1.2;display:flex;align-items:center;justify-content:center;background:#f0f1f3;padding:30px}',
-    '.gcell-name{font-size:13px;color:#1a1a2e;text-align:left;padding:10px 14px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fff;border-top:1px solid #e8e8e8;font-weight:400}',
+    '.gcell-thumb{width:100%;min-height:200px;max-height:240px;object-fit:cover;display:block}',
+    '.gcell-icon{width:100%;min-height:200px;display:flex;align-items:center;justify-content:center;background:#eef0f5;padding:40px}',
+    '.gcell-name{font-size:14px;color:#1a1a2e;text-align:left;padding:12px 16px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fff;border-top:1px solid #e5e5e5;font-weight:400}',
     '.gcell-name-lg{font-size:12px;padding:7px 8px}',
     // preview overlay
     '.prev-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center}',
@@ -153,7 +153,7 @@ function injectStyles() {
     '.auth-err{background:#fff0f0;border:1px solid #fca5a5;border-radius:7px;padding:9px 13px;font-size:13px;color:#dc2626;margin-bottom:12px}',
     '.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a2e;color:#fff;font-size:13px;padding:10px 18px;border-radius:9px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap;z-index:300}'
     + '.app-body{display:flex;flex:1;min-height:0}'
-    + '.sidebar{width:260px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa}'
+    + '.sidebar{width:190px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa}'
     + '.sidebar-title{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;padding:6px 24px 4px}'
     + '.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;font-size:13px;color:#444;border-radius:0;transition:background 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
     + '.sidebar-item:hover{background:#f0f0f0}'
@@ -170,7 +170,7 @@ function injectStyles() {
 
 function ficon(tag, name, large) {
   var e = ext(name||''), col='#bbb'
-  var sz = large ? '64' : '20'
+  var sz = large ? '80' : '20'
   var p = 'M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z'
   if (tag==='folder'){col='#0061ff';p='M3 7a2 2 0 0 1 2-2h3.586a1 1 0 0 1 .707.293L11 7h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'}
   else if (VID_EXTS.indexOf(e)>=0){col='#6366f1';p='M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'}
