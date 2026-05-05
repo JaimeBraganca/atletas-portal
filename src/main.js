@@ -100,7 +100,7 @@ function injectStyles() {
     '.bc-sep{font-size:13px;color:#ccc;flex-shrink:0}',
     '.bc-cur{font-size:13px;color:#555;font-weight:500;padding:3px 6px;white-space:nowrap}',
     // toolbar
-    '.toolbar{padding:8px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f5f5f5}',
+    '.toolbar{padding:8px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f5f5f5;background:#fff;position:sticky;top:0;z-index:10}',
     '.tool-count{font-size:12px;color:#bbb}',
     '.tool-r{display:flex;gap:4px}',
     // list view
@@ -157,7 +157,7 @@ function injectStyles() {
     '.auth-err{background:#fff0f0;border:1px solid #fca5a5;border-radius:7px;padding:9px 13px;font-size:13px;color:#dc2626;margin-bottom:12px}',
     '.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a2e;color:#fff;font-size:13px;padding:10px 18px;border-radius:9px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap;z-index:300}'
     + '.app-body{display:flex;flex:1;min-height:0}'
-    + '.sidebar{width:190px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa}'
+    + '.sidebar{width:190px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa;position:sticky;top:0;height:calc(100vh - 56px);align-self:flex-start}'
     + '.sidebar-title{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;padding:6px 24px 4px}'
     + '.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;font-size:13px;color:#444;border-radius:0;transition:background 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
     + '.sidebar-item:hover{background:#f0f0f0}'
@@ -243,7 +243,10 @@ function renderShell() {
     +'<span style=\"font-weight:500;\">Nome ↑</span>'
     +'<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" width=\"12\" height=\"12\"><polyline points=\"6 9 12 15 18 9\"/></svg>'
     +'</button>'
-    +'<button class=\"ic-btn\" id=\"btn-layout2\" title=\"Layout\">'+GSM_IC+'</button>'
+    +'<div style=\"display:flex;gap:4px;\">'
+    +'<button class=\"ic-btn\" id=\"lv-gsm\">'+GSM_IC+'</button>'
+    +'<button class=\"ic-btn\" id=\"lv-list\">'+LIST_IC+'</button>'
+    +'</div>'
     +'</div>'
     +'<div id=\"fl\" class=\"file-list\"><div class=\"loading\"><div class=\"spin\"></div> A carregar...</div></div>'
     +'</div>'
@@ -252,20 +255,18 @@ function renderShell() {
     +'<div class=\"toast\" id=\"toast\"></div>'
 
   document.getElementById('btn-out').addEventListener('click', async function(){ await supabase.auth.signOut(); renderAuth() })
-  document.getElementById('btn-layout2').addEventListener('click', function(e){ toggleLayoutMenu(e) })
+  document.getElementById('lv-gsm').addEventListener('click', function(){ setLayout('gsm') })
+  document.getElementById('lv-list').addEventListener('click', function(){ setLayout('list') })
   document.getElementById('sort-btn').addEventListener('click', function(e){ toggleSortMenu(e) })
   setLayout(state.layout)
 }
 
 function setLayout(l) {
   state.layout = l
-  // Update layout button icon
-  var btn = document.getElementById('btn-layout2')
-  if (btn) {
-    var icons = {'list': LIST_IC, 'gsm': GSM_IC, 'glg': GLG_IC}
-    btn.innerHTML = icons[l] || GSM_IC
-    btn.classList.add('on')
-  }
+  var gsm = document.getElementById('lv-gsm')
+  var lst = document.getElementById('lv-list')
+  if (gsm) gsm.classList.toggle('on', l === 'gsm')
+  if (lst) lst.classList.toggle('on', l === 'list')
   renderFiles()
 }
 
