@@ -158,6 +158,7 @@ function injectStyles() {
     '.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a2e;color:#fff;font-size:13px;padding:10px 18px;border-radius:9px;opacity:0;transition:opacity 0.2s,transform 0.2s;pointer-events:none;white-space:nowrap;z-index:300}'
     + '.app-body{display:flex;flex:1;min-height:0}'
     + '.sidebar{width:190px;flex-shrink:0;border-right:1px solid #f0f0f0;padding:12px 0;overflow-y:auto;background:#fafafa;position:sticky;top:0;height:calc(100vh - 56px);align-self:flex-start}'
+    + '@media(max-width:768px){.sidebar{display:none!important;width:0;padding:0;border:none}}'
     + '.sidebar-title{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;padding:6px 24px 4px}'
     + '.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;font-size:13px;color:#444;border-radius:0;transition:background 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
     + '.sidebar-item:hover{background:#f0f0f0}'
