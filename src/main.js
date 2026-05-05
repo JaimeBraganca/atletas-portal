@@ -91,16 +91,16 @@ function injectStyles() {
     .top-r { display:flex; align-items:center; gap:6px }
     .out-btn { width:32px; height:32px; border:1px solid #eee; border-radius:7px; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#666 }
     .out-btn:hover { background:#f5f5f5 }
-    .app-body { display:flex; flex:1; overflow:hidden; height:calc(100vh - 52px) }
-    .sidebar { width:200px; flex-shrink:0; border-right:1px solid #f0f0f0; background:#fafafa; overflow-y:auto; height:100% }
+    .app-body { display:flex; flex:1; overflow:hidden; height:calc(100vh - 52px); position:relative }
+    .sidebar { width:200px; flex-shrink:0; border-right:1px solid #f0f0f0; background:#fafafa; overflow-y:auto; height:100%; position:sticky; top:0; align-self:flex-start; max-height:calc(100vh - 52px) }
     .sidebar-title { font-size:10px; font-weight:700; color:#aaa; text-transform:uppercase; letter-spacing:0.6px; padding:14px 20px 6px }
     .sb-item { display:flex; align-items:center; gap:8px; padding:7px 20px; cursor:pointer; font-size:13px; color:#333; user-select:none; -webkit-tap-highlight-color:transparent }
     .sb-item:hover { background:#efefef }
     .sb-item.active { background:#eff4ff; color:#0061ff; font-weight:500 }
     .sb-arrow { width:12px; height:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#bbb; transition:transform 0.15s; cursor:pointer }
     .sb-arrow:hover { color:#555 }
-    .main-content { flex:1; overflow-y:auto; display:flex; flex-direction:column }
-    .athlete-card { display:flex; align-items:center; gap:14px; padding:14px 20px; border-bottom:1px solid #f0f0f0; background:#fff; position:sticky; top:0; z-index:9; flex-shrink:0 }
+    .main-content { flex:1; overflow-y:auto; display:flex; flex-direction:column; height:100% }
+    .athlete-card { display:flex; align-items:center; gap:14px; padding:14px 20px; border-bottom:1px solid #f0f0f0; background:#fff; position:sticky; top:0; z-index:9; flex-shrink:0; backdrop-filter:blur(8px) }
     .ath-photo { width:44px; height:44px; border-radius:50%; object-fit:cover; border:1px solid #eee; flex-shrink:0 }
     .ath-ph { width:44px; height:44px; border-radius:50%; background:#e8f0ff; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; color:#0061ff; flex-shrink:0 }
     .ath-name { font-size:16px; font-weight:600; color:#0f1923 }
@@ -110,7 +110,7 @@ function injectStyles() {
     .bc-btn:hover { background:#eff4ff }
     .bc-sep { font-size:12px; color:#ccc }
     .bc-cur { font-size:12px; color:#555; font-weight:500; padding:2px 4px }
-    .toolbar { padding:8px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #f5f5f5; background:#fff; flex-shrink:0; position:sticky; top:73px; z-index:8 }
+    .toolbar { padding:8px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #f5f5f5; background:#fff; flex-shrink:0; position:sticky; top:72px; z-index:8 }
     .sort-dir-btn { display:flex; align-items:center; gap:4px; background:none; border:none; cursor:pointer; font-size:13px; color:#333; padding:4px 6px; border-radius:6px; font-family:inherit; font-weight:500 }
     .sort-dir-btn:hover { background:#f5f5f5 }
     .sort-cat-btn { display:flex; align-items:center; background:none; border:none; cursor:pointer; padding:4px; border-radius:6px; color:#bbb; opacity:0; transition:opacity 0.15s }
