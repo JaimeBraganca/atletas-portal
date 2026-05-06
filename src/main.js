@@ -83,7 +83,7 @@ function injectStyles() {
   s.textContent = `
     * { box-sizing:border-box; margin:0; padding:0 }
     body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#fff; color:#1a1a2e; -webkit-font-smoothing:antialiased; font-size:14px }
-    #app { min-height:100vh; display:flex; flex-direction:column }
+    #app { height:100vh; display:flex; flex-direction:column; overflow:hidden }
     .topbar { height:52px; border-bottom:1px solid #eee; display:flex; align-items:center; justify-content:space-between; padding:0 20px; background:#fff; position:sticky; top:0; z-index:50; flex-shrink:0 }
     .top-l { display:flex; align-items:center; gap:10px }
     .top-logo { width:28px; height:28px; border-radius:6px; object-fit:cover }
@@ -91,16 +91,16 @@ function injectStyles() {
     .top-r { display:flex; align-items:center; gap:6px }
     .out-btn { width:32px; height:32px; border:1px solid #eee; border-radius:7px; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#666 }
     .out-btn:hover { background:#f5f5f5 }
-    .app-body { display:flex; flex:1; overflow:hidden; height:calc(100vh - 52px); position:relative }
-    .sidebar { width:200px; flex-shrink:0; border-right:1px solid #f0f0f0; background:#fafafa; overflow-y:auto; height:100%; position:sticky; top:0; align-self:flex-start; max-height:calc(100vh - 52px) }
+    .app-body { display:flex; flex:1; overflow:hidden; min-height:0 }
+    .sidebar { width:200px; flex-shrink:0; border-right:1px solid #f0f0f0; background:#fafafa; overflow-y:auto; height:100% }
     .sidebar-title { font-size:10px; font-weight:700; color:#aaa; text-transform:uppercase; letter-spacing:0.6px; padding:14px 20px 6px }
     .sb-item { display:flex; align-items:center; gap:8px; padding:7px 20px; cursor:pointer; font-size:13px; color:#333; user-select:none; -webkit-tap-highlight-color:transparent }
-    .sb-item:hover { background:#efefef }
+    .sb-item:hover { background:#e8e8e8 }
     .sb-item.active { background:#eff4ff; color:#0061ff; font-weight:500 }
     .sb-arrow { width:12px; height:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#bbb; transition:transform 0.15s; cursor:pointer }
     .sb-arrow:hover { color:#555 }
-    .main-content { flex:1; overflow-y:auto; display:flex; flex-direction:column; height:100% }
-    .athlete-card { display:flex; align-items:center; gap:14px; padding:14px 20px; border-bottom:1px solid #f0f0f0; background:#fff; position:sticky; top:0; z-index:9; flex-shrink:0; backdrop-filter:blur(8px) }
+    .main-content { flex:1; overflow-y:auto; display:flex; flex-direction:column; min-width:0 }
+    .athlete-card { display:flex; align-items:center; gap:14px; padding:14px 20px; border-bottom:1px solid #f0f0f0; background:#fff; position:sticky; top:0; z-index:9; flex-shrink:0 }
     .ath-photo { width:44px; height:44px; border-radius:50%; object-fit:cover; border:1px solid #eee; flex-shrink:0 }
     .ath-ph { width:44px; height:44px; border-radius:50%; background:#e8f0ff; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; color:#0061ff; flex-shrink:0 }
     .ath-name { font-size:16px; font-weight:600; color:#0f1923 }
@@ -119,7 +119,7 @@ function injectStyles() {
     .ic-btn:hover { background:#f5f5f5 }
     .ic-btn.on { background:#f0f0f0; border-color:#ccc }
     .lv-btns { display:flex; gap:3px }
-    .file-list { flex:1 }
+    .file-list { flex:1; background:#fff }
     .frow { display:flex; align-items:center; gap:12px; padding:10px 20px; border-bottom:1px solid #f8f8f8; cursor:pointer; -webkit-tap-highlight-color:transparent }
     .frow:hover { background:#fafafa }
     .frow:active { background:#f3f3f3 }
@@ -150,8 +150,8 @@ function injectStyles() {
     .loading { padding:40px; text-align:center; color:#aaa; font-size:13px; display:flex; align-items:center; justify-content:center; gap:8px }
     .spin { width:14px; height:14px; border:2px solid #eee; border-top-color:#0061ff; border-radius:50%; animation:sp 0.7s linear infinite; flex-shrink:0 }
     @keyframes sp { to { transform:rotate(360deg) } }
-    .empty { padding:50px; text-align:center; color:#bbb; font-size:13px }
-    .auth-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; background:#f7f7f7 }
+    .empty { padding:50px; text-align:center; color:#bbb; font-size:13px; background:#fff }
+    .auth-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; background:#f5f6f8 }
     .auth-box { width:100%; max-width:360px; background:#fff; border-radius:14px; padding:32px 28px; box-shadow:0 2px 16px rgba(0,0,0,0.08) }
     .auth-logo { text-align:center; margin-bottom:24px }
     .auth-logo img { width:52px; height:52px; border-radius:10px; display:block; margin:0 auto 12px }
