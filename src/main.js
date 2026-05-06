@@ -411,7 +411,7 @@ function renderGrid(files, fl) {
     const thumb = state.thumbs[f.path_lower]
     const inner = thumb && isMedia(f.name)
       ? `<img class="gcell-th" src="${thumb}" />`
-      : `<div class="gcell-ic">${isF ? `<img src="${FOLDER_ICON}" style="width:80%;height:80%;object-fit:contain" />` : fileIcon(f['.tag'], f.name)}</div>`
+      : `<div class="gcell-ic">${isF ? `<img src="${FOLDER_ICON}" style="width:28%;height:28%;object-fit:contain" />` : fileIcon(f['.tag'], f.name)}</div>`
     const short = f.name.length > 24 ? f.name.slice(0,22)+'…' : f.name
     return `<div class="gcell" data-path="${f.path_lower}" data-tag="${f['.tag']}" data-name="${f.name.replace(/"/g,'&quot;')}">${inner}<div class="gcell-name">${short}</div></div>`
   }).join('')}</div>`
