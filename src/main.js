@@ -135,6 +135,9 @@ function injectStyles() {
     .gcell { cursor:pointer; border-radius:8px; overflow:hidden; background:#f5f5f7; -webkit-tap-highlight-color:transparent }
     .gcell:hover { box-shadow:0 2px 10px rgba(0,0,0,0.1) }
     .gcell-ic { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; background:#f0f1f3 }
+    .gcell-skeleton { width:100%; aspect-ratio:1; background:linear-gradient(90deg,#ebebeb 25%,#f5f5f5 50%,#ebebeb 75%); background-size:200% 100%; animation:shimmer 1.4s infinite }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .frow-skeleton { width:36px; height:36px; border-radius:7px; background:linear-gradient(90deg,#ebebeb 25%,#f5f5f5 50%,#ebebeb 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; flex-shrink:0 }
     .gcell-ic img { width:100%; height:100%; object-fit:contain }
     .gcell-th { width:100%; aspect-ratio:1; object-fit:cover; display:block }
     .gcell-name { font-size:12px; color:#1a1a2e; padding:8px 10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:#fff; border-top:1px solid #eee }
@@ -385,8 +388,10 @@ function renderList(files, fl) {
     const isF = f['.tag']==='folder'
     const thumb = state.thumbs[f.path_lower]
     const icHtml = thumb && isMedia(f.name)
-      ? `<img src="${thumb}" style="width:36px;height:36px;object-fit:cover" />`
-      : fileIcon(f['.tag'], f.name)
+      ? `<img src="${thumb}" style="width:36px;height:36px;object-fit:cover;border-radius:4px" />`
+      : isMedia(f.name)
+        ? `<div class="frow-skeleton" data-skeleton="${f.path_lower}"></div>`
+        : fileIcon(f['.tag'], f.name)
     return `<div class="frow" data-path="${f.path_lower}" data-tag="${f['.tag']}" data-name="${f.name.replace(/"/g,'&quot;')}">
       <div class="frow-ic">${icHtml}</div>
       <div class="frow-info">
@@ -411,7 +416,9 @@ function renderGrid(files, fl) {
     const thumb = state.thumbs[f.path_lower]
     const inner = thumb && isMedia(f.name)
       ? `<img class="gcell-th" src="${thumb}" />`
-      : `<div class="gcell-ic">${isF ? `<img src="${FOLDER_ICON}" style="width:28%;height:28%;object-fit:contain" />` : fileIcon(f['.tag'], f.name)}</div>`
+      : isMedia(f.name)
+        ? `<div class="gcell-skeleton" data-skeleton="${f.path_lower}"></div>`
+        : `<div class="gcell-ic">${isF ? `<img src="${FOLDER_ICON}" style="width:28%;height:28%;object-fit:contain" />` : fileIcon(f['.tag'], f.name)}</div>`
     const short = f.name.length > 24 ? f.name.slice(0,22)+'…' : f.name
     return `<div class="gcell" data-path="${f.path_lower}" data-tag="${f['.tag']}" data-name="${f.name.replace(/"/g,'&quot;')}">${inner}<div class="gcell-name">${short}</div></div>`
   }).join('')}</div>`
@@ -498,10 +505,27 @@ async function loadThumbs(files) {
       if (url) {
         state.thumbs[f.path_lower] = url
         document.querySelectorAll(`[data-path="${f.path_lower}"]`).forEach(el => {
-          const ic = el.querySelector('.frow-ic, .gcell-ic')
-          if (ic) ic.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover" />`
+          // Replace grid skeleton
+          const sk = el.querySelector('.gcell-skeleton')
+          if (sk) {
+            const img = document.createElement('img')
+            img.className = 'gcell-th'
+            img.src = url
+            sk.parentNode.replaceChild(img, sk)
+          }
+          // Replace list skeleton
+          const fsk = el.querySelector('.frow-skeleton')
+          if (fsk) {
+            const img = document.createElement('img')
+            img.src = url
+            img.style.cssText = 'width:36px;height:36px;object-fit:cover;border-radius:4px'
+            fsk.parentNode.replaceChild(img, fsk)
+          }
+          // Update existing thumbs
           const ct = el.querySelector('.gcell-th')
           if (ct) ct.src = url
+          const ic = el.querySelector('.frow-ic img')
+          if (ic) ic.src = url
         })
       }
     }
